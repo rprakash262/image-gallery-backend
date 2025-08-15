@@ -31,10 +31,14 @@ const storageRoutes = require("./apis/storage");
 const imagesRoutes = require("./apis/image");
 const userRoutes = require("./apis/user");
 const albumRoutes = require("./apis/album");
+const errorHandler = require("./middlewares/error.middleware");
 
 app.use("/api/v1/storage", storageRoutes);
 app.use("/api/v1/images", imagesRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/albums", albumRoutes);
+
+// Use Error handler middleware
+app.use(errorHandler);
 
 module.exports = app;

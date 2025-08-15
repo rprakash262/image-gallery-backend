@@ -11,6 +11,15 @@ const createNewAlbum = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Album name is required.");
   }
 
+  const isAlreadyExists = await Album.findOne({
+    albumName: albumName.toLowerCase().trim(),
+    owner: _id
+  });
+
+  if (!!isAlreadyExists) {
+    throw new ApiError(400, `Album with name "${albumName}" already exists.`);
+  }
+
   const newAlbum = Album({ albumName, owner: _id });
 
   const response = await newAlbum.save();
