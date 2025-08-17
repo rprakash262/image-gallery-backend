@@ -9,7 +9,7 @@ app.use(express.json());
 //cors
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3000,https://image-gallery-frontend-8a73.onrender.com",
     methods: "GET,POST,PUT,PATCH,DELETE",
     credentials: true,
     allowedHeaders: "Content-Type,Authorization"
