@@ -48,4 +48,20 @@ const getAllAlbums = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createNewAlbum, getAllAlbums };
+const getAlbumDetailsById = asyncHandler(async (req, res) => {
+  const { albumId } = req.params;
+  const { _id } = req.user;
+
+  if (albumId) {
+    const response = await Album.findOne({
+      owner: _id,
+      _id: albumId,
+    });
+
+    res.status(200).json(new ApiResponse(200, response));
+  } else {
+    throw new ApiError(400, "Album Id required.");
+  }
+})
+
+module.exports = { createNewAlbum, getAllAlbums, getAlbumDetailsById };
